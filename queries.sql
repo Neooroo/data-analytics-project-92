@@ -6,12 +6,12 @@ from customers
 --Топ 10 продавцов с наибольшей выручкой
 
 SELECT concat(e.first_name, ' ', e.last_name) as name, count(s.sales_id) as operations, 
-round(sum(p.price * s.quantity), 0) as income
+trunc(sum(p.price * s.quantity), 0) as income
 FROM employees e
 inner join sales s on e.employee_id = s.sales_person_id
 inner join products p on p.product_id = s.product_id 
 group by concat(e.first_name, ' ', e.last_name)
-order by round(sum(p.price * s.quantity), 0) desc
+order by trunc(sum(p.price * s.quantity), 0) desc
 limit 10
 
 --Продавцы, чья выручка ниже средней выручки всех продавцов
