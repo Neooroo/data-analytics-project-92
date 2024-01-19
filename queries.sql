@@ -18,12 +18,12 @@ limit 10
 
 
 with cte1 as (
-SELECT concat(e.first_name, ' ', e.last_name) as name, round( avg(p.price * s.quantity), 0) as average_income
+SELECT concat(e.first_name, ' ', e.last_name) as name, trunc( avg(p.price * s.quantity), 0) as average_income
 FROM employees e
 inner join sales s on e.employee_id = s.sales_person_id
 inner join products p on p.product_id = s.product_id 
 group by concat(e.first_name, ' ', e.last_name)
-order by round(avg(p.price * s.quantity), 0) asc ),
+order by trunc(avg(p.price * s.quantity), 0) asc ),
 
 cte2 as (
 select avg(average_income) as avg_all
