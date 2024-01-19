@@ -40,7 +40,7 @@ where average_income < avg_all
 with cte3 as ( 
 SELECT concat(e.first_name, ' ', e.last_name) as name, extract(isodow from s.sale_date), 
 lower(to_char(s.sale_date, 'Day')) as weekday, 
-round(sum(p.price * s.quantity), 0) as income
+trunc(sum(p.price * s.quantity), 0) as income
 FROM employees e
 inner join sales s on e.employee_id = s.sales_person_id
 inner join products p on p.product_id = s.product_id 
